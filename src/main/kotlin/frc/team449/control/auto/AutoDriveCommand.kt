@@ -1,12 +1,10 @@
 package frc.team449.control.auto
 
-import edu.wpi.first.math.MathUtil
+import com.pathplanner.lib.PathPlannerTrajectory
 import edu.wpi.first.math.controller.HolonomicDriveController
 import edu.wpi.first.math.controller.RamseteController
 import edu.wpi.first.math.geometry.Pose2d
-import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.math.kinematics.ChassisSpeeds
-import edu.wpi.first.math.trajectory.Trajectory
 import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj.shuffleboard.EventImportance
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard
@@ -24,8 +22,8 @@ import frc.team449.control.holonomic.HolonomicDrive
  */
 class AutoDriveCommand<T : DriveSubsystem>(
   val drivetrain: T,
-  val trajectory: Trajectory,
-  val controller: (Pose2d, Trajectory.State) -> ChassisSpeeds,
+  val trajectory: PathPlannerTrajectory,
+  val controller: (Pose2d, PathPlannerTrajectory.PathPlannerState) -> ChassisSpeeds,
   val resetPose: Boolean
 ) : CommandBase() {
   private var startTime = 0.0
@@ -46,9 +44,10 @@ class AutoDriveCommand<T : DriveSubsystem>(
   }
 
   override fun execute() {
-    drivetrain.set(
-      controller(drivetrain.pose, trajectory.sample(Timer.getFPGATimestamp()))
-    )
+    val desiredState =
+      drivetrain.set(
+        controller(drivetrain.pose, trajectory.sample(Timer.getFPGATimestamp() - startTime) as PathPlannerTrajectory.PathPlannerState)
+      )
   }
 
   override fun isFinished(): Boolean {
@@ -70,15 +69,15 @@ class AutoDriveCommand<T : DriveSubsystem>(
   }
 
   companion object {
+    /**
+     * @return command to automatically drive a holonomic drive (eg. swerve, mecanum, ...) to a desired destination
+     */
     fun holonomicDriveCommand(
       drivetrain: HolonomicDrive,
-      trajectory: Trajectory,
+      trajectory: PathPlannerTrajectory,
       controller: HolonomicDriveController,
-      startHeading: Double,
-      endHeading: Double,
       resetPose: Boolean
     ): AutoDriveCommand<HolonomicDrive> {
-      val totalTime = trajectory.totalTimeSeconds
       return AutoDriveCommand(
         drivetrain,
         trajectory,
@@ -86,11 +85,7 @@ class AutoDriveCommand<T : DriveSubsystem>(
           controller.calculate(
             currentPose,
             desiredState,
-            Rotation2d.fromDegrees(
-              MathUtil.interpolate(
-                startHeading, endHeading, desiredState.timeSeconds / totalTime
-              )
-            )
+            desiredState.holonomicRotation
           )
         },
         resetPose
@@ -99,11 +94,18 @@ class AutoDriveCommand<T : DriveSubsystem>(
 
     fun differentialDriveCommand(
       drivetrain: DifferentialDrive,
-      trajectory: Trajectory,
+      trajectory: PathPlannerTrajectory,
       resetPose: Boolean
     ): AutoDriveCommand<DifferentialDrive> {
       val controller = RamseteController()
-      return AutoDriveCommand(drivetrain, trajectory, { currentPose, desiredState -> controller.calculate(currentPose, desiredState) }, resetPose)
+      return AutoDriveCommand(
+        drivetrain,
+        trajectory,
+        { currentPose, desiredState ->
+          controller.calculate(currentPose, desiredState)
+        },
+        resetPose
+      )
     }
   }
 }

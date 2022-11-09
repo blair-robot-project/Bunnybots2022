@@ -7,6 +7,7 @@ import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds
 import frc.team449.control.OI
 
 /**
+ * TODO **** NOT UPDATED ON CURRENT BRANCH ****
  * Helper class to create OIs for a differential drivetrain (arcade, curvature,
  * or tank)
  */
@@ -76,7 +77,7 @@ object DifferentialOIs {
   }
 
   /**
-   * Create an OI for tank drive. Each throttles controls one side of the drive
+   * Create an OI for tank drive. Each throttle controls one side of the drive
    * separately. Each side is also ramped separately.
    *
    * <p>
@@ -106,31 +107,31 @@ object DifferentialOIs {
   }
 
   /**
-   * Scales differential drive speeds from [-1, 1] using {@code maxSpeed}, then
-   * applies ramping.
+   * Scales differential drive throttles from [-1, 1] to [-[maxSpeed], [maxSpeed]], then
+   * applies ramping to give the final [ChassisSpeeds].
    *
    * <p>
-   * Do note that although this is given a {@link DifferentialDriveWheelSpeeds}
+   * Do note that although this is given a [DifferentialDriveWheelSpeeds]
    * object, the ramping isn't applied to the left and right side but to the
-   * linear and rotational velocity using a {@link ChassisSpeeds} object.
+   * linear and rotational velocity using a [ChassisSpeeds] object.
    *
-   * @param wheelSpeeds The left and right wheel speeds
+   * @param wheelThrottles The left and right wheel throttles
    * @param kinematics Kinematics object used for turning differential drive wheel
    *        speeds to chassis speeds
    * @param maxSpeed Max linear speed for the drivetrain
    * @param xRamp Used for limiting linear/forward-back acceleration
    * @param rotRamp Used for limiting rotational acceleration
    */
-  fun scaleAndApplyRamping(
-    wheelSpeeds: edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds,
+  private fun scaleAndApplyRamping(
+    wheelThrottles: edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds,
     kinematics: DifferentialDriveKinematics,
     maxSpeed: Double,
     xRamp: SlewRateLimiter,
     rotRamp: SlewRateLimiter
   ): ChassisSpeeds {
-    var leftVel = wheelSpeeds.left * maxSpeed
-    var rightVel = wheelSpeeds.right * maxSpeed
-    var chassisSpeeds = kinematics.toChassisSpeeds(
+    val leftVel = wheelThrottles.left * maxSpeed
+    val rightVel = wheelThrottles.right * maxSpeed
+    val chassisSpeeds = kinematics.toChassisSpeeds(
       DifferentialDriveWheelSpeeds(leftVel, rightVel)
     )
     return ChassisSpeeds(
