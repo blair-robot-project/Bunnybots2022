@@ -6,29 +6,28 @@ import edu.wpi.first.wpilibj.interfaces.Gyro
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim
 import frc.team449.util.simBooleanProp
 import frc.team449.util.simDoubleProp
+import io.github.oblarg.oblog.Loggable
 import io.github.oblarg.oblog.annotations.Log
 
-class AHRS(private val navx: com.kauailabs.navx.frc.AHRS) : Gyro by navx {
+class AHRS(private val navx: com.kauailabs.navx.frc.AHRS) : Gyro by navx, Loggable {
   private var headingOffset = 0.0
 
-  // TODO fix heading set and get
   /** The current reading of the gyro with the offset included */
   var heading: Rotation2d
-    @Log
     get() {
-      return -Rotation2d.fromDegrees(headingOffset + this.navx.fusedHeading)
+      return Rotation2d.fromDegrees(headingOffset + this.navx.fusedHeading)
     }
     set(newHeading) {
-      this.headingOffset = this.navx.fusedHeading - newHeading.degrees
+      this.headingOffset = newHeading.degrees - this.navx.fusedHeading
     }
 
   constructor(port: SerialPort.Port = SerialPort.Port.kMXP) : this(com.kauailabs.navx.frc.AHRS(port))
 
   override fun reset() {
-    navx.zeroYaw()
     heading = Rotation2d()
   }
 
+  @Log.Dial
   override fun getAngle() = heading.degrees
 
   /**

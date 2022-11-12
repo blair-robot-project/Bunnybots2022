@@ -46,10 +46,13 @@ open class SwerveDrive(
     this.desiredSpeeds = desiredSpeeds
   }
 
-  override val heading: Rotation2d
+  override var heading: Rotation2d
     @Log.ToString
     get() {
       return ahrs.heading
+    }
+    set(value) {
+      ahrs.heading = value
     }
 
   // TODO fix set()
@@ -60,6 +63,7 @@ open class SwerveDrive(
       return this.odometry.poseMeters
     }
     set(value) {
+      heading = value.rotation
       this.odometry.resetPosition(value, heading)
     }
 
