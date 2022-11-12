@@ -16,4 +16,22 @@ object Paths {
       AutoConstants.MAX_VEL,
       AutoConstants.MAX_ACC
     )
+  val EEEEE =
+    PathPlanner.loadPath(
+      "5 e's",
+      AutoConstants.MAX_VEL,
+      AutoConstants.MAX_ACC
+    )
+  val EEEEEREAL =
+    PathPlanner.loadPath(
+      "eeeee",
+      AutoConstants.MAX_VEL,
+      AutoConstants.MAX_ACC
+    )
+  val WEAVE =
+    PathPlanner.loadPath(
+      "weave",
+      AutoConstants.MAX_VEL,
+      AutoConstants.MAX_ACC
+    )
 }

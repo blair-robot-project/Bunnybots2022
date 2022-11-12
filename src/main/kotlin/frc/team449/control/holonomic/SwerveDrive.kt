@@ -31,6 +31,7 @@ open class SwerveDrive(
   init {
     // Zero out the gyro
     ahrs.calibrate()
+    ahrs.heading = Rotation2d()
   }
   private val kinematics = SwerveDriveKinematics(
     *this.modules

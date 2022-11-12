@@ -15,7 +15,7 @@ class AHRS(private val navx: com.kauailabs.navx.frc.AHRS) : Gyro by navx, Loggab
   /** The current reading of the gyro with the offset included */
   var heading: Rotation2d
     get() {
-      return Rotation2d.fromDegrees(headingOffset + this.navx.fusedHeading)
+      return -Rotation2d.fromDegrees(headingOffset + this.navx.fusedHeading)
     }
     set(newHeading) {
       this.headingOffset = newHeading.degrees - this.navx.fusedHeading

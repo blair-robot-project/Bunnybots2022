@@ -66,6 +66,7 @@ class HolonomicFollower(
     yController.reset()
     thetaController.reset(drivetrain.pose.rotation.radians)
 
+    timer.reset()
     timer.start()
   }
 
@@ -87,13 +88,12 @@ class HolonomicFollower(
   }
 
   override fun isFinished(): Boolean {
-    return (timer.hasElapsed(trajectory.totalTimeSeconds) && controller.atReference()) ||
-      (timer.hasElapsed(trajectory.totalTimeSeconds + timeout))
+    return (timer.hasElapsed(trajectory.totalTimeSeconds)) /**&& controller.atReference()) ||
+     (timer.hasElapsed(trajectory.totalTimeSeconds + timeout))*/
   }
 
   override fun end(interrupted: Boolean) {
     timer.stop()
-    timer.reset()
     drivetrain.stop()
   }
 }
