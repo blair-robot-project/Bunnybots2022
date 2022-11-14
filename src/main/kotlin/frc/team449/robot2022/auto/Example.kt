@@ -12,7 +12,7 @@ class Example(
 ) {
 
   fun routine(): AutoRoutine {
-    val traj = Paths.FIVE_BALL
+    val traj = Paths.FOUR
 
     val cmd = ParallelCommandGroup(
       HolonomicFollower(

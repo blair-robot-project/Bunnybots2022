@@ -18,7 +18,7 @@ object Paths {
     )
   val EEEEE =
     PathPlanner.loadPath(
-      "5 e's",
+      "9",
       AutoConstants.MAX_VEL,
       AutoConstants.MAX_ACC
     )
@@ -31,6 +31,12 @@ object Paths {
   val WEAVE =
     PathPlanner.loadPath(
       "weave",
+      AutoConstants.MAX_VEL,
+      AutoConstants.MAX_ACC
+    )
+  val FOUR =
+    PathPlanner.loadPath(
+      "4",
       AutoConstants.MAX_VEL,
       AutoConstants.MAX_ACC
     )
