@@ -30,9 +30,9 @@ class HolonomicFollower(
   private val resetPose: Boolean,
   maxRotVel: Double,
   maxRotAcc: Double,
-  private val translationTol: Double = 0.05,
-  private val angleTol: Double = 0.05,
-  private val timeout: Double = 0.05
+  private val translationTol: Double = 0.03,
+  private val angleTol: Double = 0.03,
+  private val timeout: Double = 1.5
 ) : CommandBase() {
 
   private val timer = Timer()
@@ -89,8 +89,8 @@ class HolonomicFollower(
   }
 
   override fun isFinished(): Boolean {
-    return timer.hasElapsed(trajectory.totalTimeSeconds) && controller.atReference() ||
-      (timer.hasElapsed(trajectory.totalTimeSeconds + timeout))
+    return timer.hasElapsed(trajectory.totalTimeSeconds) && controller.atReference()/** ||
+     (timer.hasElapsed(trajectory.totalTimeSeconds + timeout))*/
   }
 
   override fun end(interrupted: Boolean) {

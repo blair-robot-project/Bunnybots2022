@@ -60,6 +60,7 @@ class RobotLoop : TimedRobot() {
     if (autoCommand != null) {
       CommandScheduler.getInstance().cancel(autoCommand)
     }
+    robot.drive.stop()
     robot.drive.defaultCommand = DriveCommand(robot.drive, robot.oi, true)
   }
 

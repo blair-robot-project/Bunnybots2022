@@ -7,7 +7,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase
 */
 class DriveCommand(
   private val drive: DriveSubsystem,
-  private val oi: OI
+  private val oi: OI,
+  private val run: Boolean
 ) : CommandBase() {
 
   init {
@@ -15,6 +16,10 @@ class DriveCommand(
   }
 
   override fun execute() {
-    drive.set(oi.get())
+    if (run) {
+      drive.set(oi.get())
+    } else {
+      drive.stop()
+    }
   }
 }
