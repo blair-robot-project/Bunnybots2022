@@ -9,6 +9,6 @@ object AutoConstants : Loggable {
   const val MAX_ACC = 1.0 // 1.5
   const val MAX_ROTVEL = 2.0 // 4.0
   const val MAX_ROTACC = 1.5
-  const val TRANSLATION_KP = 1.2
-  const val ROTATION_KP = 1.0
+  const val TRANSLATION_KP = 1.5
+  const val ROTATION_KP = 1.25
 }

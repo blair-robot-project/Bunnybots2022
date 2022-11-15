@@ -46,6 +46,7 @@ class RobotLoop : TimedRobot() {
   }
 
   override fun autonomousInit() {
+    robot.drive.defaultCommand = DriveCommand(robot.drive, robot.oi, false)
     val routine = autoChooser.selected
     if (routine != null) {
       this.autoCommand = routine.cmd
@@ -59,14 +60,14 @@ class RobotLoop : TimedRobot() {
     if (autoCommand != null) {
       CommandScheduler.getInstance().cancel(autoCommand)
     }
-    robot.drive.defaultCommand = DriveCommand(robot.drive, robot.oi)
+    robot.drive.defaultCommand = DriveCommand(robot.drive, robot.oi, true)
   }
 
   override fun teleopPeriodic() {
   }
 
   override fun disabledInit() {
-    robot.drive.stop()
+    robot.drive.defaultCommand = DriveCommand(robot.drive, robot.oi, false)
   }
 
   override fun disabledPeriodic() {}

@@ -49,6 +49,7 @@ class HolonomicFollower(
   )
 
   init {
+    addRequirements(drivetrain)
     // controlling heading which is circular (0, 2PI)
     thetaController.enableContinuousInput(.0, 2 * PI)
 
@@ -88,8 +89,8 @@ class HolonomicFollower(
   }
 
   override fun isFinished(): Boolean {
-    return (timer.hasElapsed(trajectory.totalTimeSeconds)) /**&& controller.atReference()) ||
-     (timer.hasElapsed(trajectory.totalTimeSeconds + timeout))*/
+    return timer.hasElapsed(trajectory.totalTimeSeconds) && controller.atReference() ||
+      (timer.hasElapsed(trajectory.totalTimeSeconds + timeout))
   }
 
   override fun end(interrupted: Boolean) {
