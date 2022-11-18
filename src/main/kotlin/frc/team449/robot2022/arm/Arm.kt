@@ -29,13 +29,14 @@ class Arm(
     controller.goal = goalState
   }
 
-  fun togglePos() {
-    if (controller.goal == TrapezoidProfile.State(ArmConstants.hopperDesiredAngle, 0.0)) {
-      goToPos(ArmConstants.groundAngle)
-    }
-    else if (controller.goal == TrapezoidProfile.State(ArmConstants.groundAngle, 0.0)) {
-      goToPos(ArmConstants.hopperDesiredAngle)
-    }
+  fun hopperPos() {
+    var goalState: TrapezoidProfile.State = TrapezoidProfile.State(ArmConstants.hopperDesiredAngle, 0.0)
+    controller.goal = goalState
+  }
+
+  fun groundPos() {
+    var goalState: TrapezoidProfile.State = TrapezoidProfile.State(ArmConstants.groundAngle, 0.0)
+    controller.goal = goalState
   }
 
   override fun periodic() {
