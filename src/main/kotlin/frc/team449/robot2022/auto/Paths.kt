@@ -40,4 +40,10 @@ object Paths {
       AutoConstants.MAX_VEL,
       AutoConstants.MAX_ACC
     )
+  val CrossLine =
+    PathPlanner.loadPath(
+      "CrossLine",
+      AutoConstants.MAX_VEL,
+      AutoConstants.MAX_ACC
+    )
 }
