@@ -38,9 +38,11 @@ class RobotLoop : TimedRobot() {
 
     SmartDashboard.putData(autoChooser)
 
-    NetworkTableInstance.getDefault().stopServer()
-    NetworkTableInstance.getDefault().startClient("localhost")
-
+    if (!isReal()) {
+      NetworkTableInstance.getDefault().stopServer()
+      NetworkTableInstance.getDefault().startClient("localhost")
+    }
+    // add cameras here
     robot.drive.addCamera(VisionCamera("gloworm"))
   }
 
