@@ -5,7 +5,8 @@ import org.photonvision.PhotonCamera
 import org.photonvision.common.hardware.VisionLEDMode
 
 class VisionCamera(
-  cameraName: String
+  cameraName: String,
+  private val robotToCamera: Transform2d
 ) : PhotonCamera(cameraName) {
   init {
     setLED(VisionLEDMode.kOff)
@@ -19,7 +20,8 @@ class VisionCamera(
     val result = latestResult
     val camToTarget: Transform3d = result.bestTarget.bestCameraToTarget
     val fieldToCam: Pose3d = targetPose.transformBy(camToTarget.inverse())
-    return fieldToCam.toPose2d()
+    val camPose2d = fieldToCam.toPose2d()
+    return camPose2d.transformBy(robotToCamera.inverse())
   }
 
   /**

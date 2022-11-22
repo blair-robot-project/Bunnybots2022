@@ -1,5 +1,8 @@
 package frc.team449
 
+import edu.wpi.first.math.geometry.Rotation2d
+import edu.wpi.first.math.geometry.Transform2d
+import edu.wpi.first.math.geometry.Translation2d
 import edu.wpi.first.networktables.NetworkTableInstance
 import edu.wpi.first.wpilibj.DriverStation
 import edu.wpi.first.wpilibj.RobotBase
@@ -13,6 +16,7 @@ import frc.team449.control.auto.AutoChooser
 import frc.team449.robot2022.Robot
 import frc.team449.system.VisionCamera
 import io.github.oblarg.oblog.Logger
+import kotlin.math.PI
 
 /** The main class of the robot, constructs all the subsystems and initializes default commands. */
 class RobotLoop : TimedRobot() {
@@ -43,7 +47,17 @@ class RobotLoop : TimedRobot() {
       NetworkTableInstance.getDefault().startClient("localhost")
     }
     // add cameras here
-    robot.drive.addCamera(VisionCamera("gloworm"))
+    robot.drive.addCamera(
+      VisionCamera(
+        "gloworm",
+        Transform2d(
+          Translation2d(0.04445, 0.3175),
+          Rotation2d(
+            PI / 2
+          )
+        )
+      )
+    )
   }
 
   override fun robotPeriodic() {
