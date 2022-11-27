@@ -7,7 +7,7 @@ import frc.team449.control.auto.AutoUtils
 import frc.team449.control.auto.HolonomicFollower
 import frc.team449.robot2022.Robot
 
-class Test (private val robot: Robot){
+class Test(private val robot: Robot) {
   fun routine(): AutoRoutine {
     val traj = Paths.TEST
 

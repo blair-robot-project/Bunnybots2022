@@ -70,6 +70,7 @@ open class SwerveModule constructor(
   fun stop() {
     turnController.setpoint = turningMotor.position
     desiredSpeed = 0.0
+    prevDesiredSpeed = 0.0
   }
   override fun configureLogName() = this.name
 
@@ -88,7 +89,9 @@ open class SwerveModule constructor(
       drivingMotor.velocity
     )
     val driveFF = driveFeedforward.calculate(
-      desiredSpeed
+      prevDesiredSpeed,
+      desiredSpeed,
+      dt
     )
     drivingMotor.setVoltage(drivePid + driveFF)
 

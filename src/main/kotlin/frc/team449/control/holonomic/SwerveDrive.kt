@@ -33,6 +33,7 @@ open class SwerveDrive(
     ahrs.calibrate()
     ahrs.heading = Rotation2d()
   }
+
   private val kinematics = SwerveDriveKinematics(
     *this.modules
       .map { it.location }.toTypedArray()
@@ -56,7 +57,6 @@ open class SwerveDrive(
       ahrs.heading = value
     }
 
-  // TODO fix set()
   /** The x y theta location of the robot on the field */
   override var pose: Pose2d
     @Log.ToString
@@ -70,6 +70,8 @@ open class SwerveDrive(
 
   override fun stop() {
     this.set(ChassisSpeeds(0.0, 0.0, 0.0))
+    for (module in modules)
+      module.stop()
   }
 
   override fun periodic() {
@@ -100,9 +102,26 @@ open class SwerveDrive(
   companion object {
     /** Create a swerve drivetrain using DriveConstants */
     fun swerveDrive(ahrs: AHRS): SwerveDrive {
-      val driveMotorController = { PIDController(DriveConstants.DRIVE_KP, DriveConstants.DRIVE_KI, DriveConstants.DRIVE_KD) }
-      val turnMotorController = { PIDController(DriveConstants.TURN_KP, DriveConstants.TURN_KI, DriveConstants.TURN_KD) }
-      val driveFeedforward = SimpleMotorFeedforward(DriveConstants.DRIVE_KS, DriveConstants.DRIVE_KV, DriveConstants.DRIVE_KA)
+      val driveMotorController = {
+        PIDController(
+          DriveConstants.DRIVE_KP,
+          DriveConstants.DRIVE_KI,
+          DriveConstants.DRIVE_KD
+        )
+      }
+      val turnMotorController =
+        {
+          PIDController(
+            DriveConstants.TURN_KP,
+            DriveConstants.TURN_KI,
+            DriveConstants.TURN_KD
+          )
+        }
+      val driveFeedforward = SimpleMotorFeedforward(
+        DriveConstants.DRIVE_KS,
+        DriveConstants.DRIVE_KV,
+        DriveConstants.DRIVE_KA
+      )
       val modules = listOf(
         SwerveModule.create(
           "FLModule",
@@ -142,7 +161,7 @@ open class SwerveDrive(
           driveMotorController(),
           turnMotorController(),
           driveFeedforward,
-          Translation2d(DriveConstants.WHEELBASE / 2, - DriveConstants.TRACKWIDTH / 2)
+          Translation2d(DriveConstants.WHEELBASE / 2, -DriveConstants.TRACKWIDTH / 2)
         ),
         SwerveModule.create(
           "BLModule",
@@ -162,7 +181,7 @@ open class SwerveDrive(
           driveMotorController(),
           turnMotorController(),
           driveFeedforward,
-          Translation2d(- DriveConstants.WHEELBASE / 2, DriveConstants.TRACKWIDTH / 2)
+          Translation2d(-DriveConstants.WHEELBASE / 2, DriveConstants.TRACKWIDTH / 2)
         ),
         SwerveModule.create(
           "BRModule",
@@ -182,7 +201,7 @@ open class SwerveDrive(
           driveMotorController(),
           turnMotorController(),
           driveFeedforward,
-          Translation2d(- DriveConstants.WHEELBASE / 2, - DriveConstants.TRACKWIDTH / 2)
+          Translation2d(-DriveConstants.WHEELBASE / 2, -DriveConstants.TRACKWIDTH / 2)
         )
       )
       return SwerveDrive(

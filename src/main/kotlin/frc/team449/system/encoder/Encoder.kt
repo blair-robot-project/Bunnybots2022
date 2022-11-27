@@ -14,7 +14,7 @@ import io.github.oblarg.oblog.annotations.Log
  *                (should be >= 1, not a reciprocal), e.g. this would be 70 if there were
  *                a 70:1 gearing between the encoder and the final output
  */
-abstract class  Encoder(
+abstract class Encoder(
   val name: String,
   encoderCPR: Int,
   unitPerRotation: Double,

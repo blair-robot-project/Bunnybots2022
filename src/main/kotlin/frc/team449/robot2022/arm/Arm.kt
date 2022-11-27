@@ -7,10 +7,9 @@ import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import frc.team449.system.motor.WrappedMotor
 
-
 class Arm(
   private val armMotor: WrappedMotor
-  ): SubsystemBase() {
+) : SubsystemBase() {
 
   var lastSpeed: Double = 0.0
   var lastTime: Double = Timer.getFPGATimestamp()
@@ -42,7 +41,8 @@ class Arm(
   override fun periodic() {
     var accel: Double = (controller.setpoint.velocity - lastSpeed) / (Timer.getFPGATimestamp() - lastTime)
     armMotor.setVoltage(
-      controller.calculate(armMotor.encoder.position) + feedForward.calculate(controller.setpoint.velocity, accel))
+      controller.calculate(armMotor.encoder.position) + feedForward.calculate(controller.setpoint.velocity, accel)
+    )
     lastSpeed = controller.setpoint.velocity
     lastTime = Timer.getFPGATimestamp()
   }
