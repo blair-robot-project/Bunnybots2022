@@ -15,6 +15,7 @@ object ArmConstants {
   const val kV = 1.0
   const val kS = 1.0
   const val kA = 1.0
+  const val kG = 1.0
 
   const val hopperDesiredAngle = Math.PI / 2
   const val groundAngle = 0.0
