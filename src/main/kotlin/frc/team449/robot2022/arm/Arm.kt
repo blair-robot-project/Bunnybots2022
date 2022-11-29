@@ -22,7 +22,7 @@ class Arm(
     TrapezoidProfile.Constraints(ArmConstants.maxVel, ArmConstants.maxAccel)
   )
 
-  private var feedForward: ArmFeedforward = ArmFeedforward(ArmConstants.kS, ArmConstants.kV, ArmConstants.kA)
+  private var feedForward: ArmFeedforward = ArmFeedforward(ArmConstants.kS, ArmConstants.kG, ArmConstants.kV, ArmConstants.kA)
 
   fun goToPos(desiredPos: Double) {
     var goalState: TrapezoidProfile.State = TrapezoidProfile.State(desiredPos, 0.0)
