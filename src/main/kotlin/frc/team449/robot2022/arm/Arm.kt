@@ -39,6 +39,13 @@ class Arm(
     controller.goal = goalState
   }
 
+  // is this necessary? or is it automatic in periodic()
+  fun stop() {
+    var goalState: TrapezoidProfile.State = TrapezoidProfile.State(0.0, 0.0)
+    controller.goal = goalState
+    armMotor.setVoltage(0.0)
+  }
+
   override fun periodic() {
     var feedForwardAccel: Double = (controller.setpoint.velocity - lastSpeed) / (Timer.getFPGATimestamp() - lastTime)
     armMotor.setVoltage(
