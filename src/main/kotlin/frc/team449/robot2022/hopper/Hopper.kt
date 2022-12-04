@@ -4,22 +4,25 @@ import edu.wpi.first.wpilibj.DoubleSolenoid
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 
 // Should this start by closing the gate?
-class Hopper(private val gate: DoubleSolenoid) : SubsystemBase() {
-  var gateOpen = false
-    private set
+class Hopper(
+  private val gate: DoubleSolenoid
+  ) : SubsystemBase() {
+  
+  // "Open" means that balls can be transferred into the hopper.
+  private var hopperOpen = true
 
-  fun openGate() {
+  private fun openGate() {
     gate.set(DoubleSolenoid.Value.kReverse)
-    gateOpen = true
+    hopperOpen = true
   }
 
-  fun closeGate() {
+  private fun closeGate() {
     gate.set(DoubleSolenoid.Value.kForward)
-    gateOpen = false
+    hopperOpen = false
   }
 
   fun toggleGate() {
-    if (gateOpen) {
+    if (hopperOpen) {
       closeGate()
     } else {
       openGate()
