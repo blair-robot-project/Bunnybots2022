@@ -2,7 +2,6 @@ package frc.team449.robot2022.arm
 
 import edu.wpi.first.math.controller.ArmFeedforward
 import edu.wpi.first.math.controller.ProfiledPIDController
-import edu.wpi.first.math.controller.SimpleMotorFeedforward
 import edu.wpi.first.math.trajectory.TrapezoidProfile
 import edu.wpi.first.wpilibj.Timer
 import edu.wpi.first.wpilibj2.command.SubsystemBase

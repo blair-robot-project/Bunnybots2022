@@ -89,9 +89,9 @@ open class SwerveModule constructor(
       drivingMotor.velocity
     )
     val driveFF = driveFeedforward.calculate(
-      prevDesiredSpeed,
+//      prevDesiredSpeed,
       desiredSpeed,
-      dt
+//      dt
     )
     drivingMotor.setVoltage(drivePid + driveFF)
 

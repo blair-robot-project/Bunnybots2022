@@ -9,7 +9,7 @@ class Intake(
   private val intakeMotor: WrappedMotor,
   private val intakeSensor: DigitalInput,
   private val intakePiston: DoubleSolenoid
-): SubsystemBase() {
+) : SubsystemBase() {
 
   fun runIntake() {
     intakeMotor.setVoltage(IntakeConstants.INTAKE_VOLTAGE)
@@ -27,10 +27,8 @@ class Intake(
     // idk if this is correct..
     if (intakeSensor.get()) {
       intakePiston.set(DoubleSolenoid.Value.kReverse)
-    }
-    else {
+    } else {
       intakePiston.set(DoubleSolenoid.Value.kForward)
     }
   }
-
 }

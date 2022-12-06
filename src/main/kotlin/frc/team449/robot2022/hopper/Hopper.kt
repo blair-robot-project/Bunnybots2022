@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase
 // Should this start by closing the gate?
 class Hopper(
   private val gate: DoubleSolenoid
-  ) : SubsystemBase() {
-  
+) : SubsystemBase() {
+
   // "Open" means that balls can be transferred into the hopper.
   private var hopperOpen = true
 
