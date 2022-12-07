@@ -23,30 +23,18 @@ class Arm(
 
   private var feedForward: ArmFeedforward = ArmFeedforward(ArmConstants.kS, ArmConstants.kG, ArmConstants.kV, ArmConstants.kA)
 
-  fun goToPos(desiredPos: Double) {
-    var goalState: TrapezoidProfile.State = TrapezoidProfile.State(desiredPos, 0.0)
-    controller.goal = goalState
-  }
-
   fun hopperPos() {
-    var goalState: TrapezoidProfile.State = TrapezoidProfile.State(ArmConstants.hopperDesiredAngle, 0.0)
+    val goalState: TrapezoidProfile.State = TrapezoidProfile.State(ArmConstants.hopperDesiredAngle, 0.0)
     controller.goal = goalState
   }
 
   fun groundPos() {
-    var goalState: TrapezoidProfile.State = TrapezoidProfile.State(ArmConstants.groundAngle, 0.0)
+    val goalState: TrapezoidProfile.State = TrapezoidProfile.State(ArmConstants.groundAngle, 0.0)
     controller.goal = goalState
-  }
-
-  // is this necessary? or is it automatic in periodic()
-  fun stop() {
-    var goalState: TrapezoidProfile.State = TrapezoidProfile.State(0.0, 0.0)
-    controller.goal = goalState
-    armMotor.setVoltage(0.0)
   }
 
   override fun periodic() {
-    var feedForwardAccel: Double = (controller.setpoint.velocity - lastSpeed) / (Timer.getFPGATimestamp() - lastTime)
+    val feedForwardAccel: Double = (controller.setpoint.velocity - lastSpeed) / (Timer.getFPGATimestamp() - lastTime)
     armMotor.setVoltage(
       controller.calculate(armMotor.encoder.position) + feedForward.calculate(controller.setpoint.position, controller.setpoint.velocity, feedForwardAccel)
     )

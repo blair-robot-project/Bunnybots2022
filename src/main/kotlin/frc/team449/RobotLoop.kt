@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
 import frc.team449.control.DriveCommand
 import frc.team449.control.auto.AutoChooser
+import frc.team449.robot2022.ControllerBinder
 import frc.team449.robot2022.Robot
 import io.github.oblarg.oblog.Logger
 
@@ -60,6 +61,7 @@ class RobotLoop : TimedRobot() {
     if (autoCommand != null) {
       CommandScheduler.getInstance().cancel(autoCommand)
     }
+    ControllerBinder(robot.driveController).bindButtons()
     robot.drive.stop()
     robot.drive.defaultCommand = DriveCommand(robot.drive, robot.oi, true)
   }

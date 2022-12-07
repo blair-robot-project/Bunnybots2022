@@ -95,6 +95,5 @@ class HolonomicFollower(
 
   override fun end(interrupted: Boolean) {
     timer.stop()
-    drivetrain.stop()
   }
 }

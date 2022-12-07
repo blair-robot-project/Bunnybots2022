@@ -15,9 +15,9 @@ class Robot : RobotBase() {
 
   // Other CAN IDs
   private val PDP_CAN = 1
-  private val PCM_MODULE = 0
 
-  private val driveController = XboxController(0)
+  val driveController = XboxController(0)
+  val mechanismsController = XboxController(1)
 
   private val ahrs = AHRS(SerialPort.Port.kMXP)
 
