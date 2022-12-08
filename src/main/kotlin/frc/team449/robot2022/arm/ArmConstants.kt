@@ -22,7 +22,7 @@ object ArmConstants {
   const val hopperDesiredAngle = 0.0
   const val groundAngle = Math.PI / 2
 
-  val EXT_ENCODER = Encoder(9, 10)
+  val EXT_ENCODER = Encoder(8, 9)
   const val EXTERNAL_ENC_CPR = 256
   const val ARM_UPR = 2 * Math.PI
   const val ARM_GEARING = 1 / 33.33
