@@ -34,6 +34,10 @@ class ControllerBinder(
       intake::stop
     )
 
+    JoystickButton(mechanismsController, XboxController.Button.kB.value).whenPressed(
+      intake::overrideAutomatedSequence
+    )
+
     JoystickButton(mechanismsController, XboxController.Button.kX.value).whenPressed(
       hopper::toggleGate
     )

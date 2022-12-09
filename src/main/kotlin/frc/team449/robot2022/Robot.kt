@@ -14,6 +14,7 @@ import frc.team449.robot2022.intake.Intake
 import frc.team449.robot2022.intake.IntakeConstants
 import frc.team449.system.AHRS
 import frc.team449.system.encoder.NEOEncoder
+import frc.team449.system.encoder.QuadEncoder
 import frc.team449.system.motor.createSparkMax
 import io.github.oblarg.oblog.annotations.Log
 
@@ -43,9 +44,12 @@ class Robot : RobotBase() {
   private val armMotor = createSparkMax(
     "Arm",
     ArmConstants.MOTOR_CAN_ID,
-    NEOEncoder.creator(
+    QuadEncoder.creator(
+      ArmConstants.EXT_ENCODER,
+      ArmConstants.EXTERNAL_ENC_CPR,
       ArmConstants.ARM_UPR,
-      ArmConstants.ARM_GEARING
+      ArmConstants.ARM_GEARING,
+      false
     ),
     slaveSparks = mapOf(Pair(ArmConstants.SLAVE_MOTOR_CAN_ID, false))
   )
@@ -77,6 +81,6 @@ class Robot : RobotBase() {
   )
 
   val arm = Arm(armMotor)
-  val intake = Intake(intakeMotor, intakeSensor, intakePneumatics)
   val hopper = Hopper(hopperPneumatics)
+  val intake = Intake(intakeMotor, intakeSensor, intakePneumatics, arm, hopper)
 }

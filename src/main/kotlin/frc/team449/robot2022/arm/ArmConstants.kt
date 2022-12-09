@@ -9,6 +9,7 @@ object ArmConstants {
   const val kI = 0.0
   const val kD = 0.0
 
+  // TODO: Find maximum reasonable values here
   // Maximum velocity and acceleration.
   const val maxVel = 1.0
   const val maxAccel = 1.0

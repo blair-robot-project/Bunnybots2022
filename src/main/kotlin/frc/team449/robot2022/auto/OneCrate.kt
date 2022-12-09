@@ -20,12 +20,13 @@ class OneCrate(private val robot: Robot) {
         AutoConstants.MAX_ROTVEL,
         AutoConstants.MAX_ROTACC
       ),
+      // TODO: Add subsystem commands here
       AutoUtils.autoSequence(
         listOf(
           1.0 to InstantCommand()
         )
       )
     )
-    return AutoRoutine("OneCrateE", cmd)
+    return AutoRoutine("OneCrate", cmd)
   }
 }

@@ -8,24 +8,24 @@ class Hopper(
   private val gate: DoubleSolenoid
 ) : SubsystemBase() {
 
-  // "Open" means that balls can be transferred into the hopper.
+  // "Retracted" means that the hopper is near the robot and not opened.
   private var hopperRetracted = true
 
-  fun closeGate() {
+  fun retractHopper() {
     gate.set(DoubleSolenoid.Value.kReverse)
     hopperRetracted = true
   }
 
-  private fun openGate() {
+  private fun dumpHopper() {
     gate.set(DoubleSolenoid.Value.kForward)
     hopperRetracted = false
   }
 
   fun toggleGate() {
     if (hopperRetracted) {
-      openGate()
+      dumpHopper()
     } else {
-      closeGate()
+      retractHopper()
     }
   }
 }

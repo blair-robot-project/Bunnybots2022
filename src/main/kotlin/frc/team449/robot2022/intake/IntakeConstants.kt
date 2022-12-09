@@ -14,4 +14,7 @@ object IntakeConstants {
 
   const val INTAKE_UPR = 2 * Math.PI
   const val INTAKE_GEARING = 1.0 / 4.0
+
+  // TODO: Find optimal wait time
+  const val automatedWaitSeconds = 3.0
 }
