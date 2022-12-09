@@ -11,7 +11,8 @@ class Intake(
   private val intakeMotor: WrappedMotor,
   private val intakeSensor: DigitalInput,
   private val intakePiston: DoubleSolenoid,
-//  private val arm: Arm
+//  private val arm: Arm,
+//  private val hopper: Hopper
 ) : SubsystemBase(), Loggable {
 
   @Log.ToString
@@ -32,13 +33,16 @@ class Intake(
   // TODO: Test automated arm pickup based on a crate being sensed
   override fun periodic() {
     sensorOutput = intakeSensor.get()
-//    if (sensorOutput) {
-//      intakePiston.set(DoubleSolenoid.Value.kForward)
-//      arm.hopperPos()
+    if (!sensorOutput) {
+//      hopper.closeGate()
+      intakePiston.set(DoubleSolenoid.Value.kForward)
 //      this.stop()
-//    } else {
-    intakePiston.set(DoubleSolenoid.Value.kOff)
+//      arm.hopperPos()
+//      WaitCommand(1.0).andThen(arm::groundPos)
 //      arm.groundPos()
-//    }
+    } else {
+      intakePiston.set(DoubleSolenoid.Value.kReverse)
+//      arm.groundPos()
+    }
   }
 }

@@ -4,39 +4,16 @@ import com.pathplanner.lib.PathPlanner
 
 object Paths {
 
-  val TEST =
+  val OneCrate =
     PathPlanner.loadPath(
-      "test",
+      "One Crate",
       AutoConstants.MAX_VEL,
       AutoConstants.MAX_ACC
     )
-  val FIVE_BALL =
+
+  val CrossAutoLine =
     PathPlanner.loadPath(
-      "wishes",
-      AutoConstants.MAX_VEL,
-      AutoConstants.MAX_ACC
-    )
-  val EEEEE =
-    PathPlanner.loadPath(
-      "9",
-      AutoConstants.MAX_VEL,
-      AutoConstants.MAX_ACC
-    )
-  val EEEEEREAL =
-    PathPlanner.loadPath(
-      "eeeee",
-      AutoConstants.MAX_VEL,
-      AutoConstants.MAX_ACC
-    )
-  val WEAVE =
-    PathPlanner.loadPath(
-      "weave",
-      AutoConstants.MAX_VEL,
-      AutoConstants.MAX_ACC
-    )
-  val FOUR =
-    PathPlanner.loadPath(
-      "4",
+      "crossAutoLine",
       AutoConstants.MAX_VEL,
       AutoConstants.MAX_ACC
     )

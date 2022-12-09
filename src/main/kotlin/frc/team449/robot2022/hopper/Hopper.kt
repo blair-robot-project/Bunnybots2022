@@ -9,15 +9,23 @@ class Hopper(
 ) : SubsystemBase() {
 
   // "Open" means that balls can be transferred into the hopper.
-  private var hopperOpen = true
+  private var hopperRetracted = true
+
+  fun closeGate() {
+    gate.set(DoubleSolenoid.Value.kReverse)
+    hopperRetracted = true
+  }
+
+  private fun openGate() {
+    gate.set(DoubleSolenoid.Value.kForward)
+    hopperRetracted = false
+  }
 
   fun toggleGate() {
-    if (hopperOpen) {
-      gate.set(DoubleSolenoid.Value.kForward)
-      hopperOpen = false
+    if (hopperRetracted) {
+      openGate()
     } else {
-      gate.set(DoubleSolenoid.Value.kReverse)
-      hopperOpen = true
+      closeGate()
     }
   }
 }
