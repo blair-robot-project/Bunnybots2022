@@ -21,7 +21,7 @@ class Intake(
   @Log.ToString
   private var sensorOutput = false
 
-  private var overriden: () -> Boolean = { false }
+  private var overridden: () -> Boolean = { false }
 
   fun runIntake() {
     intakeMotor.setVoltage(IntakeConstants.INTAKE_VOLTAGE)
@@ -36,16 +36,17 @@ class Intake(
   }
 
   fun overrideAutomatedSequence() {
-    overriden = { true }
+    overridden = { true }
   }
 
   // TODO: Test automated arm pickup based on a crate being sensed
   override fun periodic() {
     sensorOutput = !intakeSensor.get()
     if (sensorOutput) {
-      CommandScheduler.getInstance().schedule(AutomatedIntakeCommand(arm, hopper, this, overriden))
+      CommandScheduler.getInstance().schedule(AutomatedIntakeCommand(arm, hopper, this, overridden))
     } else {
       intakePiston.set(DoubleSolenoid.Value.kReverse)
+      overridden = { false }
     }
   }
 }

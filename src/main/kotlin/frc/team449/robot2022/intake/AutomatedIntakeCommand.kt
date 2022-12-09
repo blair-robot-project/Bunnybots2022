@@ -11,7 +11,7 @@ class AutomatedIntakeCommand(
   private val arm: Arm,
   private val hopper: Hopper,
   private val intake: Intake,
-  private val overriden: () -> Boolean
+  private var overridden: () -> Boolean
 ) : CommandBase() {
 
   private val timer = Timer()
@@ -35,10 +35,11 @@ class AutomatedIntakeCommand(
   }
 
   override fun isFinished(): Boolean {
-    return timer.equals(IntakeConstants.automatedWaitSeconds) && arm.controller.atGoal() || overriden()
+    return timer.equals(IntakeConstants.automatedWaitSeconds) && arm.controller.atGoal() || overridden()
   }
 
   override fun end(interrupted: Boolean) {
+    // TODO: What drivers want to happen in case they override the automation
     intake.stop()
     intake.intakePiston.set(DoubleSolenoid.Value.kReverse)
     arm.groundPos()
