@@ -1,9 +1,6 @@
 package frc.team449.robot2022
 
 import edu.wpi.first.wpilibj.XboxController
-import edu.wpi.first.wpilibj2.command.InstantCommand
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup
-import edu.wpi.first.wpilibj2.command.WaitCommand
 import edu.wpi.first.wpilibj2.command.button.JoystickButton
 import frc.team449.robot2022.arm.Arm
 import frc.team449.robot2022.hopper.Hopper
@@ -34,11 +31,7 @@ class ControllerBinder(
     JoystickButton(mechanismsController, XboxController.Button.kLeftBumper.value).whenPressed(
       intake::runIntakeReverse
     ).whenReleased(
-      SequentialCommandGroup(
-        InstantCommand(intake::stop),
-        WaitCommand(2.0),
-        InstantCommand({ intake.runCommand = true })
-      )
+      intake::stop
     )
 
     JoystickButton(mechanismsController, XboxController.Button.kX.value).whenPressed(

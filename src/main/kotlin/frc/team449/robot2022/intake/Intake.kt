@@ -22,7 +22,7 @@ class Intake(
 
   var runCommand = true
 
-  private var cmd = SequentialCommandGroup(
+  private val automationCommand = SequentialCommandGroup(
     InstantCommand(hopper::retractHopper),
     InstantCommand(this::pistonOn),
     WaitCommand(0.5),
@@ -31,8 +31,13 @@ class Intake(
     InstantCommand(arm::groundPos)
   )
 
+  private val reverseIntakeCommand = SequentialCommandGroup(
+    WaitCommand(2.0),
+    InstantCommand({ runCommand = false })
+  )
+
   init {
-    cmd.addRequirements(arm, hopper, this)
+    automationCommand.addRequirements(arm, hopper, this)
     intakePiston.set(DoubleSolenoid.Value.kReverse)
   }
 
@@ -47,17 +52,17 @@ class Intake(
   fun runIntakeReverse() {
     intakeMotor.setVoltage(-IntakeConstants.INTAKE_VOLTAGE)
     intakePiston.set(DoubleSolenoid.Value.kReverse)
+    CommandScheduler.getInstance().schedule(reverseIntakeCommand)
   }
 
   fun stop() {
     intakeMotor.setVoltage(0.0)
   }
 
-  // TODO: Test automated arm pickup based on a crate being sensed
   override fun periodic() {
     sensorOutput = !intakeSensor.get()
     if (sensorOutput && runCommand) {
-      CommandScheduler.getInstance().schedule(cmd)
+      CommandScheduler.getInstance().schedule(automationCommand)
       runCommand = false
     }
   }
