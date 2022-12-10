@@ -32,7 +32,7 @@ class HolonomicFollower(
   maxRotAcc: Double,
   private val translationTol: Double = 0.03,
   private val angleTol: Double = 0.03,
-  private val timeout: Double = 1.5
+  private val timeout: Double = 1.0
 ) : CommandBase() {
 
   private val timer = Timer()

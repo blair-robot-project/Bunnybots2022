@@ -18,7 +18,6 @@ class AutoChooser(
         robot = robot,
         intake = robot.intake,
         arm = robot.arm,
-        drive = robot.drive,
         hopper = robot.hopper
       ).routine()
     )
