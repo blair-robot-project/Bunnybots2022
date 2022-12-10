@@ -58,5 +58,4 @@ object Paths {
       AutoConstants.MAX_VEL,
       AutoConstants.MAX_ACC
     )
-
 }

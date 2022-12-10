@@ -62,7 +62,7 @@ class RobotLoop : TimedRobot() {
       CommandScheduler.getInstance().cancel(autoCommand)
     }
     robot.drive.stop()
-    ControllerBinder(robot.driveController, robot.arm, robot.intake, robot.hopper).bindButtons()
+    ControllerBinder(robot.mechanismsController, robot.arm, robot.intake, robot.hopper).bindButtons()
     robot.drive.defaultCommand = DriveCommand(robot.drive, robot.oi, true)
   }
 

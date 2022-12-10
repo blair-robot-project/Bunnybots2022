@@ -11,8 +11,8 @@ object ArmConstants {
 
   // TODO: Find maximum reasonable values here
   // Maximum velocity and acceleration.
-  const val maxVel = 1.0
-  const val maxAccel = 1.0
+  const val maxVel = 10.0
+  const val maxAccel = 5.5
 
   // Feed forward values.
   const val kV = 0.10764
@@ -20,8 +20,8 @@ object ArmConstants {
   const val kA = 0.10546
   const val kG = -0.40959
 
-  const val hopperDesiredAngle = 0.0
-  const val groundAngle = Math.PI / 2
+  const val hopperDesiredAngle = 0.25
+  const val groundAngle = 2.2
 
   val EXT_ENCODER = Encoder(8, 9)
   const val EXTERNAL_ENC_CPR = 256

@@ -10,7 +10,7 @@ object IntakeConstants {
   const val IR_SENSOR_CHANNEL = 7
 
   const val LEFT_CAN_ID = 10
-  const val RIGHT_CAN_ID = 9
+  const val RIGHT_CAN_ID = 20
 
   const val INTAKE_UPR = 2 * Math.PI
   const val INTAKE_GEARING = 1.0 / 4.0

@@ -47,8 +47,8 @@ object DriveConstants {
   const val DRIVE_GEARING = 1 / 6.75
   const val DRIVE_UPR = 0.31818905832
   const val TURN_UPR = 2 * Math.PI
-  const val MAX_LINEAR_SPEED = 1.5
-  const val MAX_ROT_SPEED = 2.5
+  const val MAX_LINEAR_SPEED = 2.25
+  const val MAX_ROT_SPEED = 3.0
   const val MAX_ATTAINABLE_MK4I_SPEED = 4.267
   const val MAX_ACCEL = 4.5
 
