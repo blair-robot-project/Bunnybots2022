@@ -10,7 +10,7 @@ import frc.team449.robot2022.Robot
 class CrossAutoLine(private val robot: Robot) {
 
   fun routine(): AutoRoutine {
-    val traj = Paths.CrossAutoLine
+    val traj = Paths.OneCratept1
     val cmd = ParallelCommandGroup(
       HolonomicFollower(
         robot.drive,
