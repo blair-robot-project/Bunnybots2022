@@ -227,7 +227,8 @@ open class SwerveDrive(
         NEOEncoder.creator(
           DriveConstants.DRIVE_UPR,
           DriveConstants.DRIVE_GEARING
-        )
+        ),
+        currentLimit = 40
       )
 
     /** Helper to make turning motors for swerve */
@@ -249,7 +250,8 @@ open class SwerveDrive(
           offset,
           DriveConstants.TURN_UPR,
           sensorPhase
-        )
+        ),
+        currentLimit = 40
       )
 
     /**

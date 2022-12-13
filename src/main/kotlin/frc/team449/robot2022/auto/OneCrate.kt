@@ -10,7 +10,7 @@ import frc.team449.robot2022.Robot
 class OneCrate(private val robot: Robot) {
 
   fun routine(): AutoRoutine {
-    val traj = Paths.OneCrate
+    val traj = Paths.OneCratept2
 
     val cmd = ParallelCommandGroup(
       HolonomicFollower(

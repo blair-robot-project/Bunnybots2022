@@ -5,20 +5,20 @@ import edu.wpi.first.wpilibj.Encoder
 object ArmConstants {
 
   // PID controller values.
-  const val kP = 1.0
+  const val kP = 2.0
   const val kI = 0.0
   const val kD = 0.0
 
   // TODO: Find maximum reasonable values here
   // Maximum velocity and acceleration.
   const val maxVel = 10.0
-  const val maxAccel = 5.5
+  const val maxAccel = 6.0
 
   // Feed forward values.
-  const val kV = 0.10764
+  const val kV = 0.15
   const val kS = 0.5727
   const val kA = 0.10546
-  const val kG = -0.40959
+  const val kG = -0.36
 
   const val hopperDesiredAngle = 0.25
   const val groundAngle = 2.2

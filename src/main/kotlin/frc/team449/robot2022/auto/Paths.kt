@@ -4,23 +4,23 @@ import com.pathplanner.lib.PathPlanner
 
 object Paths {
 
-  val OneCrate =
+  val TwoCrateRight =
     PathPlanner.loadPath(
-      "One Crate",
+      "Right Two Crate",
       AutoConstants.MAX_VEL,
       AutoConstants.MAX_ACC
     )
 
-  val CrossAutoLine =
+  val TwoCrateLeft =
     PathPlanner.loadPath(
-      "crossAutoLine",
+      "Left Two Crate",
       AutoConstants.MAX_VEL,
       AutoConstants.MAX_ACC
     )
 
-  val OneCratept1 =
+  val OneCrateRight =
     PathPlanner.loadPath(
-      "One Crate pt. 1",
+      "Right",
       AutoConstants.MAX_VEL,
       AutoConstants.MAX_ACC
     )
@@ -38,9 +38,9 @@ object Paths {
     AutoConstants.MAX_ACC
   )
 
-  val RedCratept1 =
+  val OneCrateLeft =
     PathPlanner.loadPath(
-      "Red Crate pt. 1",
+      "Left",
       AutoConstants.MAX_VEL,
       AutoConstants.MAX_ACC
     )

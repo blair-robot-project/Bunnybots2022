@@ -37,5 +37,9 @@ class ControllerBinder(
     JoystickButton(mechanismsController, XboxController.Button.kX.value).whenPressed(
       hopper::toggleGate
     )
+
+    JoystickButton(mechanismsController, XboxController.Button.kB.value).whenPressed(
+      intake::pistonOff
+    )
   }
 }

@@ -51,7 +51,8 @@ class Robot : RobotBase() {
       ArmConstants.ARM_GEARING,
       false
     ),
-    slaveSparks = mapOf(Pair(ArmConstants.SLAVE_MOTOR_CAN_ID, false))
+    slaveSparks = mapOf(Pair(ArmConstants.SLAVE_MOTOR_CAN_ID, false)),
+    currentLimit = 40
   )
 
   private val intakeMotor = createSparkMax(
@@ -61,7 +62,8 @@ class Robot : RobotBase() {
       IntakeConstants.INTAKE_UPR,
       IntakeConstants.INTAKE_GEARING
     ),
-    slaveSparks = mapOf(Pair(IntakeConstants.RIGHT_CAN_ID, true))
+    slaveSparks = mapOf(Pair(IntakeConstants.RIGHT_CAN_ID, true)),
+    currentLimit = 20
   )
 
   private val intakePneumatics = DoubleSolenoid(

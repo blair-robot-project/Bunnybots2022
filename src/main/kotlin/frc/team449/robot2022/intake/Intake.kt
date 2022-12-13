@@ -27,13 +27,13 @@ class Intake(
     InstantCommand(this::pistonOn),
     WaitCommand(0.5),
     InstantCommand(arm::hopperPos),
-    WaitCommand(1.5),
+    WaitCommand(2.0),
     InstantCommand(arm::groundPos)
   )
 
   private val reverseIntakeCommand = SequentialCommandGroup(
-    WaitCommand(2.0),
-    InstantCommand({ runCommand = false })
+    WaitCommand(1.0),
+    InstantCommand({ runCommand = true })
   )
 
   init {
@@ -41,8 +41,12 @@ class Intake(
     intakePiston.set(DoubleSolenoid.Value.kReverse)
   }
 
-  private fun pistonOn() {
+  fun pistonOn() {
     intakePiston.set(DoubleSolenoid.Value.kForward)
+  }
+
+  fun pistonOff() {
+    intakePiston.set(DoubleSolenoid.Value.kReverse)
   }
 
   fun runIntake() {

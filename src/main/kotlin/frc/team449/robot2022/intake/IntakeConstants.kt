@@ -2,7 +2,7 @@ package frc.team449.robot2022.intake
 
 object IntakeConstants {
 
-  const val INTAKE_VOLTAGE = 4.0
+  const val INTAKE_VOLTAGE = 4.2
 
   const val PNEUMATICS_FORWARD_CHANNEL = 2
   const val PNEUMATICS_REVERSE_CHANNEL = 3
